@@ -147,3 +147,20 @@ export const getInvoice = async (req, res) => {
 
 };
 
+export const getAllInvoices = async (req, res) => {
+    console.log("Inside getAllInvoices function");
+  
+    try {
+      const invoices = await Invoice.find()
+        .populate('items')
+        .populate('customer', 'name billingAddress phone');
+  
+      console.log("Invoices found:", invoices);
+  
+      res.status(200).json(invoices);
+    } catch (error) {
+      console.error("Error fetching invoices:", error);
+      res.status(500).json({ message: 'Error fetching invoices', error: error.message });
+    }
+  };
+  

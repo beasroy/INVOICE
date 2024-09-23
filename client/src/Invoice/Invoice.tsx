@@ -44,7 +44,7 @@ interface Invoice {
 export default function Invoice() {
   const { id } = useParams<{ id: string }>(); // Typing useParams to get the id as a string
   const [invoice, setInvoice] = useState<Invoice | null>(null); // Invoice is initially null
- 
+
 
   useEffect(() => {
     const fetchInvoice = async () => {
@@ -90,9 +90,13 @@ export default function Invoice() {
   const totalRoundedAmount = totalAmount-invoice.roundOffAmount;
   const amountInWords = toWords(totalRoundedAmount.toFixed(2));
   
+  const formatDate = (dateStr: string) => {
+    const [year, month, day] = dateStr.split('T')[0].split('-');
+    return `${day}-${month}-${year}`;
+  }
 
   return (
-    <div className="max-w-6xl my-10 mx-auto p-4 bg-white shadow-lg rounded-lg">
+    <div className="max-w-6xl mx-auto p-4 bg-white shadow-lg rounded-lg">
       <div className="border-b-2 border-purple-200 pb-4 mb-4">
         <h1 className="text-2xl font-bold text-center">Tax Invoice</h1>
         <div className="flex justify-between items-start">
@@ -114,7 +118,7 @@ export default function Invoice() {
         <div className="bg-purple-100 p-4 rounded">
           <h3 className="font-semibold mb-2">Invoice Details</h3>
           <p>Invoice No.: {invoice.invoiceNumber}</p>
-          <p>Date: {invoice.invoiceDate}</p>
+          <p>Date: {formatDate(invoice.invoiceDate)}</p>
         </div>
       </div>
 

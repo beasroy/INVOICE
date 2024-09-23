@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "composite": true,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
@@ -11,6 +12,7 @@
         "./src/*"
       ]
     },
+   
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -26,5 +28,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+ "include": [
+    "src/**/*"
+, "src/Dashboard"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
